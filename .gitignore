@@ -1,0 +1,86 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Environment variables (IMPORTANT - contains API keys!)
+.env
+.env.local
+.env.*.local
+
+# Android
+*.apk
+*.aab
+*.keystore
+*.jks
+android/.gradle/
+android/app/build/
+android/build/
+
+# iOS
+ios/Pods/
+ios/build/
+*.xcworkspace
+*.xcuserdata
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+
+# ADB keys (NEVER commit these!)
+*.adbkey
+*.adbkey.pub
+adbkey
+adbkey.pub
+
+# Temporary files
+*.log
+*.tmp
+.cache/
+```
+
+---
+
+## What to Commit for Initial Commit
+
+**✅ DO commit:**
+```
+app/                    # Your screens
+src/                    # Your source code
+assets/                 # Images, fonts
+app.json               # Expo config
+package.json           # Dependencies list
+package-lock.json      # Dependency lock
+tsconfig.json          # TypeScript config
+.gitignore             # Git ignore rules
+README.md              # Project docs
+```
+
+**❌ DON'T commit:**
+```
+node_modules/          # Reinstalled via npm install
+.expo/                 # Local Expo cache
+.env                   # API keys (sensitive!)
+*.adbkey               # ADB authentication keys
+android/build/         # Build artifacts
+ios/Pods/              # iOS dependencies
