@@ -71,7 +71,7 @@ assets/                 # Images, fonts
 app.json               # Expo config
 package.json           # Dependencies list
 package-lock.json      # Dependency lock
-tsconfig.json          # TypeScript config
+tsconfig.json          # TypeScript config 
 .gitignore             # Git ignore rules
 README.md              # Project docs
 ```
@@ -83,4 +83,5 @@ node_modules/          # Reinstalled via npm install
 .env                   # API keys (sensitive!)
 *.adbkey               # ADB authentication keys
 android/build/         # Build artifacts
-ios/Pods/              # iOS dependencies
+ios/Pods/              # iOS dependencies.env
+node_modules/

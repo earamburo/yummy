@@ -1,0 +1,31 @@
+# State Management
+npm install zustand
+
+# Data Fetching & Caching
+npm install @tanstack/react-query
+
+# Local Database (offline-first)
+npm install @nozbe/watermelondb
+npm install @nozbe/with-observables
+
+# Async Storage (for Zustand persistence)
+npm install @react-native-async-storage/async-storage
+
+# Image Handling
+npm install expo-image-picker
+npm install expo-file-system
+
+# Camera
+npm install expo-camera
+
+# Environment Variables
+npm install expo-constants
+
+# Testing
+npm install --save-dev jest @testing-library/react-native
+
+# TypeScript types (if not already installed)
+npm install --save-dev @types/react @types/react-native
+
+# Check that all packages installed correctly
+npm list zustand @tanstack/react-query @nozbe/watermelondb
