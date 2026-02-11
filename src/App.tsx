@@ -1,6 +1,7 @@
 import { createStaticNavigation, StaticParamList } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator, View } from "react-native";
+import { ThemeProvider } from './context/ThemeContext';
 import { AppStack } from "./navigation/AppStack";
 import { LoginScreen } from "./screens/Login";
 
@@ -40,11 +41,15 @@ const LinkingLoading = () => (
 
 export const App = () => {
     return (
-        <Navigation
-            linking={{
-                enabled: 'auto',
-                prefixes: [],
-            }}
-            fallback={<LinkingLoading />} />
+        <ThemeProvider>
+            <Navigation
+                linking={{
+                    enabled: 'auto',
+                    prefixes: [],
+                }}
+                fallback={<LinkingLoading />} />
+
+        </ThemeProvider>
+
     )
 }
