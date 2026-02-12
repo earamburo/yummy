@@ -1,6 +1,6 @@
 export const Theme = {
   name: "Chef's Delight",
-  
+
   colors: {
     // Primary - Vibrant chef green
     primary: {
@@ -9,7 +9,7 @@ export const Theme = {
       dark: '#388E3C',        // Deep green
       contrast: '#FFFFFF',
     },
-    
+
     // Secondary - Playful orange from hat band
     secondary: {
       main: '#FF8A50',        // Bright orange
@@ -17,21 +17,21 @@ export const Theme = {
       dark: '#E5673A',        // Deep coral
       contrast: '#FFFFFF',
     },
-    
+
     // Accent - Cheerful yellow
     accent: {
       main: '#FFD54F',        // Sunny yellow
       light: '#FFE082',
       dark: '#FFCA28',
     },
-    
+
     // Background
     background: {
       default: '#FAFFFE',     // Crisp white with mint
       paper: '#FFFFFF',
       subtle: '#E8F5E9',      // Very light green
     },
-    
+
     // Text
     text: {
       primary: '#1B5E20',     // Dark green
@@ -39,7 +39,7 @@ export const Theme = {
       disabled: '#A5C8A7',
       inverse: '#FFFFFF',
     },
-    
+
     // Status
     status: {
       success: '#4CAF50',
@@ -47,21 +47,21 @@ export const Theme = {
       error: '#F44336',
       info: '#2196F3',
     },
-    
+
     // Freshness indicators
     freshness: {
       fresh: '#4CAF50',
       useSoon: '#FF9800',
       expiring: '#F44336',
     },
-    
+
     // UI Elements
     border: '#C8E6C9',
     divider: '#E8F5E9',
     shadow: 'rgba(27, 94, 32, 0.15)',
   },
-  
-  spacing : {
+
+  spacing: {
 
   },
   // Gradients
@@ -71,7 +71,7 @@ export const Theme = {
     accent: ['#FFE082', '#FFD54F'],
     card: ['#FFFFFF', '#FAFFFE'],
   },
-  
+
   // Typography
   typography: {
     fontFamily: {
@@ -80,7 +80,7 @@ export const Theme = {
       accent: 'Quicksand-SemiBold',
     },
   },
-  
+
   // Border Radius - Very rounded, playful
   borderRadius: {
     sm: 10,
@@ -89,7 +89,7 @@ export const Theme = {
     xl: 32,
     full: 9999,
   },
-  
+
   // Shadows - More pronounced
   shadows: {
     sm: {
@@ -114,6 +114,44 @@ export const Theme = {
       elevation: 10,
     },
   },
+
+  container: {
+    pageContainer: {
+      height: '100vh',
+      overflow: 'hidden'
+    },
+    loginPageContainer: {
+      backgroundColor: '#4CAF50',
+    },
+    inputContainer: {
+      backgroundColor: '#FFFFFF',
+      marginLeft: 40,
+      marginRight: 40,
+      padding: 7,
+      borderRadius: 5,
+      marginTop: 20
+    },
+    logoContainer: {
+      padding: 2,
+      height: '50vh',
+    },
+    buttonContainer: {
+      marginLeft: 60,
+      marginRight: 60,
+      padding: 7,
+      borderRadius: 5,
+      marginTop: 20, 
+      textAlign: 'center'
+    },
+    buttonAlt: {
+      backgroundColor: '#FF8A50'
+    }
+  },
+  logo: {
+    height: '50%',
+    width: '50%',
+    margin: 'auto'
+  }
 };
 
 // ============================================

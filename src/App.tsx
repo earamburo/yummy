@@ -10,9 +10,12 @@ const RootStack = createNativeStackNavigator({
     screens: {
         Login: {
             screen: LoginScreen,
+            options: {
+                headerShown: false
+            },
             linking: {
                 path: 'login'
-            }
+            },
         },
         Home: {
             screen: AppStack,

@@ -10,6 +10,8 @@ interface ThemeContextType {
     shadows: any;
     typography: any;
     gradients: any;
+    container: any;
+    logo: any;
 }
 
 interface ThemeProviderProps {
@@ -28,6 +30,8 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) =>  {
         shadows: Theme.shadows,
         typography: Theme.typography,
         gradients: Theme.gradients,
+        container: Theme.container,
+        logo: Theme.logo
     };
 
     // interface ThemeContextType {
