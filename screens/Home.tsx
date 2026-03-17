@@ -2,33 +2,35 @@ import { MetricCard } from '@/components/MetricCard';
 import { RecipeCard } from '@/components/RecipeCard';
 import { SectionHeader } from '@/components/SectionHeader';
 import { colors, spacing, typography } from '@/constants/theme';
+import { mockIngredients, mockRecipes } from '@/stores/mockData';
+import { daysUntilExpiry } from '@/util';
 import { linkTo } from 'expo-router/build/global-state/routing';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScanCTA } from '../components/ScanCTA';
 
 export const HomeScreen = () => {
 
-    // const pantry = mockIngredients;
-    // const recipes = mockRecipes;
+    const pantry = mockIngredients;
+    const recipes = mockRecipes;
 
     // Computed values (memoized so they only recalculate when pantry changes)
-    // const activeItems = useMemo(
-    //     () => pantry.filter((item) => !item.isDepleted),
-    //     [pantry]
-    // );
+    const activeItems = useMemo(
+        () => pantry.filter((item) => !item.isDepleted),
+        [pantry]
+    );
 
-    // const expiringCount = useMemo(
-    //     () =>
-    //         activeItems.filter(
-    //             (item) => daysUntilExpiry(item.estimatedExpiry) <= 3
-    //         ).length,
-    //     [activeItems]
-    // );
+    const expiringCount = useMemo(
+        () =>
+            activeItems.filter(
+                (item) => daysUntilExpiry(item.estimatedExpiry) <= 3
+            ).length,
+        [activeItems]
+    );
 
 
-    // const topRecipes = useMemo(() => recipes.slice(0, 2), [recipes]);
+    const topRecipes = useMemo(() => recipes.slice(0, 2), [recipes]);
 
     const Greeting = ({ greeting, meal }: any) => {
         return (
@@ -49,7 +51,6 @@ export const HomeScreen = () => {
                 <>
                     <Greeting greeting='Good Evening!' meal='dinner' />
                     <ScanCTA onPress={() => linkTo('/scan/camera')} />
-                    {/* ---- Metric Cards ---- */}
                     <View style={styles.metricsRow}>
                         <MetricCard
                             // value={activeItems.length}
@@ -66,13 +67,12 @@ export const HomeScreen = () => {
                         // onPress={() => router.push('/(tabs)/pantry')}
                         />
                     </View>
-                    {/* ---- Recipe Suggestions ---- */}
                     {topRecipes.length > 0 ? (
                         <>
                             <SectionHeader
                                 title="Suggested recipes"
                                 actionText="See all"
-                            // onAction={() => router.push('/(tabs)/recipes')}
+                                onAction={() => {}}
                             />
                             {topRecipes.map((recipe) => (
                                 <RecipeCard
@@ -90,11 +90,11 @@ export const HomeScreen = () => {
                             </Text>
                         </View>
                     ) : null}
-
                     {/* Bottom padding for scroll */}
-                    <View style={{ height: spacing.xxl }} />
+                    < View style={{ height: spacing.xxl }} />
                 </>
             </ScrollView>
+
         </SafeAreaView>
 
 
@@ -145,3 +145,4 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
+
