@@ -18,19 +18,18 @@
 //   />
 // ============================================================================
 
-import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
 import {
   colors,
-  typography,
-  spacing,
-  radii,
-  componentStyles,
   getCategoryColor,
   getExpiryStyle,
+  radii,
+  spacing,
+  typography
 } from '@/constants/theme';
 import { IngredientCategory, IngredientRowVariant } from '@/types';
-import { formatQuantity, formatExpiry, daysUntilExpiry } from '@/utils';
+import { daysUntilExpiry, formatQuantity } from '@/utils';
+import React from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 interface IngredientRowProps {
   variant: IngredientRowVariant;

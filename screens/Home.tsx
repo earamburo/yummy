@@ -55,14 +55,14 @@ export const HomeScreen = () => {
                             value={23}
                             label="Items in pantry"
                             color={colors.primary[600]}
-                        // onPress={() => router.push('/(tabs)/pantry')}
+                            onPress={() => navigation.navigate('Main', { screen: 'Pantry' })}
                         />
                         <MetricCard
                             // value={expiringCount}
                             value={3}
                             label="Expiring soon"
                             color={expiringCount > 0 ? colors.coral[400] : colors.text.secondary}
-                        // onPress={() => router.push('/(tabs)/pantry')}
+                            onPress={() => navigation.navigate('Main', { screen: 'Pantry' })}
                         />
                     </View>
                     {topRecipes.length > 0 ? (
@@ -76,7 +76,7 @@ export const HomeScreen = () => {
                                 <RecipeCard
                                     key={recipe.id}
                                     recipe={recipe}
-                                    onPress={() => { }}
+                                    onPress={() => navigation.navigate('Main', { screen: 'Recipes' })}
                                 />
                             ))}
                         </>

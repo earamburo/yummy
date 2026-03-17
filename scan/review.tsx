@@ -13,19 +13,19 @@
 // via route params. Users can modify them before committing to the pantry.
 // ============================================================================
 
-import React, { useState, useMemo, useCallback } from 'react';
-import { View, Text, SectionList, StyleSheet, Pressable } from 'react-native';
-import { useRouter, useLocalSearchParams } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 import {
-  IngredientRow,
   CategoryHeader,
   CTAButton,
+  IngredientRow,
 } from '@/components';
-import { colors, typography, spacing } from '@/constants/theme';
+import { colors, spacing, typography } from '@/constants/theme';
 import { useAppStore } from '@/stores/appStore';
-import { ParsedIngredient, IngredientCategory } from '@/types';
+import { IngredientCategory, ParsedIngredient } from '@/types';
+import { Ionicons } from '@expo/vector-icons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useCallback, useMemo, useState } from 'react';
+import { Pressable, SectionList, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // ---- Category display order ----
 const CATEGORY_ORDER: IngredientCategory[] = [
@@ -46,7 +46,7 @@ const CATEGORY_LABELS: Record<IngredientCategory, string> = {
 export default function ReviewScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ ingredients: string }>();
-  const addIngredients = useAppStore((s) => s.addIngredients);
+  const addIngredients = useAppStore((s: any) => s.addIngredients);
 
   // Parse ingredients from route params
   const initialIngredients: ParsedIngredient[] = useMemo(() => {
