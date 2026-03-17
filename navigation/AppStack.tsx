@@ -3,6 +3,13 @@ import { HomeScreen, PantryScreen, RecipesScreen, ScanScreen } from '../screens/
 
 
 export const AppStack = createBottomTabNavigator({
+  screenOptions: {
+    tabBarIconStyle: {
+      // backgroundColor: 'red',
+      height: 20
+    }
+
+  },
   screens: {
     Home: {
       screen: HomeScreen,

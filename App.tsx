@@ -15,7 +15,7 @@ const RootStack = createNativeStackNavigator({
         Home: {
             screen: AppStack,
             options: {
-                headerShown: false
+                headerShown: false,
             },
             linking: {
                 path: ''
