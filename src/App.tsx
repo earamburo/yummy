@@ -1,22 +1,22 @@
 import { createStaticNavigation, StaticParamList } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider } from './context/ThemeContext';
 import { AppStack } from "./navigation/AppStack";
-import { LoginScreen } from "./screens/Login";
 
 
 const RootStack = createNativeStackNavigator({
     screens: {
-        Login: {
-            screen: LoginScreen,
-            options: {
-                headerShown: false
-            },
-            linking: {
-                path: 'login'
-            },
-        },
+        // Login: {
+        //     screen: LoginScreen,
+        //     options: {
+        //         headerShown: false
+        //     },
+        //     linking: {
+        //         path: 'login'
+        //     },
+        // },
         Home: {
             screen: AppStack,
             linking: {
@@ -45,13 +45,14 @@ const LinkingLoading = () => (
 export const App = () => {
     return (
         <ThemeProvider>
-            <Navigation
-                linking={{
-                    enabled: 'auto',
-                    prefixes: [],
-                }}
-                fallback={<LinkingLoading />} />
-
+            <SafeAreaProvider>
+                <Navigation
+                    linking={{
+                        enabled: 'auto',
+                        prefixes: [],
+                    }}
+                    fallback={<LinkingLoading />} />
+            </SafeAreaProvider>
         </ThemeProvider>
 
     )
