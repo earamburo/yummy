@@ -26,7 +26,7 @@ export const AppStack = createBottomTabNavigator({
         headerShown: false
       },
       linking: {
-        path: '/scan',
+        path: 'scan',
       },
     },
     Pantry: {
@@ -35,7 +35,7 @@ export const AppStack = createBottomTabNavigator({
         headerShown: false
       },
       linking: {
-        path: '/pantry',
+        path: 'pantry',
       },
     },
     Recipes: {
@@ -44,7 +44,7 @@ export const AppStack = createBottomTabNavigator({
         headerShown: false
       },
       linking: {
-        path: '/recipes',
+        path: 'recipes',
       },
     },
   },

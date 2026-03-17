@@ -12,7 +12,7 @@ import { AppStack } from "./navigation/AppStack";
  */
 const RootStack = createNativeStackNavigator({
     screens: {
-        Home: {
+        Main: {
             screen: AppStack,
             options: {
                 headerShown: false,
@@ -61,7 +61,12 @@ const LinkingLoading = () => (
 export const App = () => {
     return (
         <SafeAreaProvider>
-            <Navigation />
+            <Navigation
+                linking={{
+                    enabled: 'auto',
+                    prefixes: [],
+                }}
+            />
         </SafeAreaProvider>
 
 

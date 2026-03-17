@@ -1,14 +1,15 @@
 import { colors, spacing, typography } from '@/constants/theme';
 import { mockIngredients, mockRecipes } from '@/stores/mockData';
-import { daysUntilExpiry } from '@/util';
-import { linkTo } from 'expo-router/build/global-state/routing';
+import { daysUntilExpiry } from '@/utils';
+import { useNavigation } from '@react-navigation/native';
 import React, { useMemo } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MetricCard, RecipeCard, ScanCTA, SectionHeader } from '../components';
 
-export const HomeScreen = () => {
 
+export const HomeScreen = () => {
+    const navigation = useNavigation();
     const pantry = mockIngredients;
     const recipes = mockRecipes;
 
@@ -47,7 +48,7 @@ export const HomeScreen = () => {
             >
                 <>
                     <Greeting greeting='Good Evening!' meal='dinner' />
-                    <ScanCTA onPress={() => linkTo('/scan/camera')} />
+                    <ScanCTA onPress={() => navigation.navigate('Main', { screen: 'Scan' })} />
                     <View style={styles.metricsRow}>
                         <MetricCard
                             // value={activeItems.length}
