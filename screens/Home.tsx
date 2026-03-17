@@ -1,6 +1,3 @@
-import { MetricCard } from '@/components/MetricCard';
-import { RecipeCard } from '@/components/RecipeCard';
-import { SectionHeader } from '@/components/SectionHeader';
 import { colors, spacing, typography } from '@/constants/theme';
 import { mockIngredients, mockRecipes } from '@/stores/mockData';
 import { daysUntilExpiry } from '@/util';
@@ -8,7 +5,7 @@ import { linkTo } from 'expo-router/build/global-state/routing';
 import React, { useMemo } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ScanCTA } from '../components/ScanCTA';
+import { MetricCard, RecipeCard, ScanCTA, SectionHeader } from '../components';
 
 export const HomeScreen = () => {
 
@@ -30,7 +27,7 @@ export const HomeScreen = () => {
     );
 
 
-    const topRecipes = useMemo(() => recipes.slice(0, 2), [recipes]);
+    const topRecipes = useMemo(() => recipes.slice(0, 3), [recipes]);
 
     const Greeting = ({ greeting, meal }: any) => {
         return (
