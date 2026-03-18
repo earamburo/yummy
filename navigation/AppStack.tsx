@@ -1,13 +1,22 @@
+import { colors } from '@/constants/theme';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeScreen, PantryScreen, RecipesScreen, ScanScreen } from '../screens/index';
+
+
+
+
 
 
 export const AppStack = createBottomTabNavigator({
   screenOptions: {
     tabBarIconStyle: {
-      // backgroundColor: 'red',
-      height: 20
-    }
+      height: 25
+    },
+    tabBarActiveTintColor: colors.primary[600],
+    tabBarInactiveTintColor: 'gray',
+
+
 
   },
   screens: {
@@ -15,6 +24,10 @@ export const AppStack = createBottomTabNavigator({
       screen: HomeScreen,
       options: {
         headerShown: false,
+        tabBarIcon: ({ focused }) => {
+          return <Ionicons name='home' color={focused ? colors.primary[600] : colors.neutral[600]} size={20} />;
+        },
+
       },
       linking: {
         path: '',
@@ -23,7 +36,10 @@ export const AppStack = createBottomTabNavigator({
     Scan: {
       screen: ScanScreen,
       options: {
-        headerShown: false
+        headerShown: false,
+        tabBarIcon: ({ focused }) => {
+          return <Ionicons name='camera' color={focused ? colors.primary[600] : colors.neutral[600]} size={20} />;
+        }
       },
       linking: {
         path: 'scan',
@@ -32,16 +48,23 @@ export const AppStack = createBottomTabNavigator({
     Pantry: {
       screen: PantryScreen,
       options: {
-        headerShown: false
+        headerShown: false,
+        tabBarIcon: ({ focused }) => {
+          return <Ionicons name='basket' color={focused ? colors.primary[600] : colors.neutral[600]} size={20} />;
+        }
       },
       linking: {
         path: 'pantry',
+
       },
     },
     Recipes: {
       screen: RecipesScreen,
       options: {
-        headerShown: false
+        headerShown: false,
+        tabBarIcon: ({ focused }) => {
+          return <Ionicons name='chatbubble' color={focused ? colors.primary[600] : colors.neutral[600]} size={20} />;
+        }
       },
       linking: {
         path: 'recipes',
