@@ -288,7 +288,7 @@ export const spacing = {
   // --- Screen Padding ---
   // Consistent horizontal padding across all screens
   screenHorizontal: 24,  // Left/right padding on all scrollable content
-  screenTop: 8,          // Below status bar (content start)
+  screenTop: 16,          // Below status bar (content start)
 
   // --- Component-specific ---
   cardPadding: 18,       // Internal padding inside recipe/metric cards
