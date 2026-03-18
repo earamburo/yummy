@@ -22,10 +22,11 @@ import { colors, spacing, typography } from '@/constants/theme';
 // import { useAppStore } from '@/stores/appStore';
 import { IngredientCategory, ParsedIngredient } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useRoute } from '@react-navigation/native';
 import React, { useCallback, useMemo, useState } from 'react';
 import { Pressable, SectionList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 // ---- Category display order ----
 const CATEGORY_ORDER: IngredientCategory[] = [
@@ -44,18 +45,23 @@ const CATEGORY_LABELS: Record<IngredientCategory, string> = {
 };
 
 export const ReviewScreen = () => {
-  const router = useRouter();
-  const params = useLocalSearchParams<{ ingredients: string }>();
+  // const params = useLocalSearchParams<{ ingredients: string }>();
   // const addIngredients = useAppStore((s: any) => s.addIngredients);
 
+  // const addIngredients = mockParsedIngredients;
+
   // Parse ingredients from route params
-  const initialIngredients: ParsedIngredient[] = useMemo(() => {
-    try {
-      return JSON.parse(params.ingredients || '[]');
-    } catch {
-      return [];
-    }
-  }, [params.ingredients]);
+
+  const route = useRoute();
+  // const initialIngredients = route.params?.ingredients as ParsedIngredient[];
+  const initialIngredients = (route.params as { ingredients?: ParsedIngredient[] })?.ingredients ?? [];
+  // const initialIngredients: ParsedIngredient[] = useMemo(() => {
+  //   try {
+  //     return JSON.parse(params.ingredients || '[]');
+  //   } catch {
+  //     return [];
+  //   }
+  // }, [params.ingredients]);
 
   // Local state for editable ingredient list
   const [ingredients, setIngredients] = useState(initialIngredients);
@@ -89,12 +95,12 @@ export const ReviewScreen = () => {
   const handleSaveAll = () => {
     // addIngredients(ingredients);
     // Navigate to pantry (replacing the scan flow stack)
-    router.replace('/(tabs)/pantry');
+    // router.replace('/(tabs)/pantry');
   };
 
   // ---- Navigate back ----
   const handleBack = () => {
-    router.back();
+    // router.back();
   };
 
   const validCount = ingredients.filter((i) => i.isValid).length;

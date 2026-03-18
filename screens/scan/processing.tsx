@@ -18,6 +18,7 @@
 
 import { CTAButton } from '@/components';
 import { colors, radii, spacing, typography } from '@/constants/theme';
+import { mockParsedIngredients } from '@/stores/mockData';
 import { ParsedIngredient } from '@/types';
 import { generateId } from '@/utils';
 import { useNavigation } from '@react-navigation/native';
@@ -109,7 +110,12 @@ export const ProcessingScreen = () => {
     //   pathname: '/scan/review',
     //   params: { ingredients: JSON.stringify(MOCK_INGREDIENTS) },
     // });
-    navigation.navigate('Scan', { screen: 'Review' })
+    navigation.navigate('Scan', {
+      screen: 'Review',
+      params: {
+        ingredients: mockParsedIngredients,
+      }, 
+    } as any)
   };
 
   return (
