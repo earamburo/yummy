@@ -21,11 +21,11 @@ import {
 import { colors, spacing, typography } from '@/constants/theme';
 // import { useAppStore } from '@/stores/appStore';
 import { IngredientCategory, ParsedIngredient } from '@/types';
-import { Ionicons } from '@expo/vector-icons';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Pressable, SectionList, StyleSheet, Text, View } from 'react-native';
+import { SectionList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 
 // ---- Category display order ----
@@ -51,7 +51,7 @@ export const ReviewScreen = () => {
   // const addIngredients = mockParsedIngredients;
 
   // Parse ingredients from route params
-
+  const navigation = useNavigation();
   const route = useRoute();
   // const initialIngredients = route.params?.ingredients as ParsedIngredient[];
   const initialIngredients = (route.params as { ingredients?: ParsedIngredient[] })?.ingredients ?? [];
@@ -96,6 +96,7 @@ export const ReviewScreen = () => {
     // addIngredients(ingredients);
     // Navigate to pantry (replacing the scan flow stack)
     // router.replace('/(tabs)/pantry');
+    navigation.navigate('Main', { screen: 'Pantry'});
   };
 
   // ---- Navigate back ----
@@ -109,13 +110,13 @@ export const ReviewScreen = () => {
     <SafeAreaView style={styles.screen} edges={['top']}>
       {/* ---- Navigation Header ---- */}
       <View style={styles.navHeader}>
-        <Pressable onPress={handleBack} hitSlop={12}>
+        {/* <Pressable onPress={handleBack} hitSlop={12}>
           <Ionicons name="arrow-back" size={20} color={colors.text.primary} />
-        </Pressable>
+        </Pressable> */}
         <Text style={styles.navTitle}>Review items</Text>
-        <Pressable onPress={handleSaveAll} hitSlop={12}>
+        {/* <Pressable onPress={handleSaveAll} hitSlop={12}>
           <Text style={styles.navAction}>Done</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
 
       {/* ---- Subtitle ---- */}
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
   },
   navHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: spacing.screenHorizontal,
     paddingVertical: spacing.md,

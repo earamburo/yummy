@@ -11,22 +11,22 @@
 // Example: /recipe/abc123 → useLocalSearchParams returns { id: 'abc123' }
 // ============================================================================
 
+import { CTAButton } from '@/components';
+import { colors, radii, spacing, typography } from '@/constants/theme';
+import { useAppStore } from '@/stores/appStore';
+import { Ionicons } from '@expo/vector-icons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import React, { useMemo } from 'react';
 import {
-  View,
-  Text,
+  Pressable,
   ScrollView,
   StyleSheet,
-  Pressable,
+  Text,
+  View,
 } from 'react-native';
-import { useRouter, useLocalSearchParams } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { Ionicons } from '@expo/vector-icons';
-import { CTAButton } from '@/components';
-import { colors, typography, spacing, radii } from '@/constants/theme';
-import { useAppStore } from '@/stores/appStore';
 
-export default function RecipeDetailScreen() {
+export const RecipeDetailScreen = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 

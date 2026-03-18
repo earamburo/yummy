@@ -1,5 +1,5 @@
 export { HomeScreen } from './Home';
-export { PantryScreen } from './Pantry';
-export { RecipesScreen } from './Recipes';
-export { ScanScreen } from './Scan';
+export { PantryScreen } from './pantry/Pantry';
+export { RecipesStack } from './recipes/RecipesStack';
+export { ScanStack } from './scan/ScanStack';
 

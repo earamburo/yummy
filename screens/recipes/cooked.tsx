@@ -12,17 +12,17 @@
 // the Recipe Detail screen's markAsCooked action.
 // ============================================================================
 
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useRouter, useLocalSearchParams } from 'expo-router';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 import { CTAButton } from '@/components';
-import { colors, typography, spacing, radii } from '@/constants/theme';
+import { colors, radii, spacing, typography } from '@/constants/theme';
 import { CookingLog } from '@/types';
 import { formatQuantity } from '@/utils';
+import { Ionicons } from '@expo/vector-icons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useMemo } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function CookedScreen() {
+export const CookedScreen = () => {
   const router = useRouter();
   const params = useLocalSearchParams<{
     recipeId: string;

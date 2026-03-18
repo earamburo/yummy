@@ -1,7 +1,7 @@
 import { colors } from '@/constants/theme';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen, PantryScreen, RecipesScreen, ScanStack } from '../screens/index';
+import { HomeScreen, PantryScreen, RecipesStack, ScanStack } from '../screens/index';
 
 
 export const AppStack = createBottomTabNavigator({
@@ -53,7 +53,7 @@ export const AppStack = createBottomTabNavigator({
       },
     },
     Recipes: {
-      screen: RecipesScreen,
+      screen: RecipesStack,
       options: {
         headerShown: false,
         tabBarIcon: ({ focused }) => {
