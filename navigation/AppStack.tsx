@@ -1,11 +1,7 @@
 import { colors } from '@/constants/theme';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen, PantryScreen, RecipesScreen, ScanScreen } from '../screens/index';
-
-
-
-
+import { HomeScreen, PantryScreen, RecipesScreen, ScanStack } from '../screens/index';
 
 
 export const AppStack = createBottomTabNavigator({
@@ -15,8 +11,6 @@ export const AppStack = createBottomTabNavigator({
     },
     tabBarActiveTintColor: colors.primary[600],
     tabBarInactiveTintColor: 'gray',
-
-
 
   },
   screens: {
@@ -34,7 +28,7 @@ export const AppStack = createBottomTabNavigator({
       },
     },
     Scan: {
-      screen: ScanScreen,
+      screen: ScanStack,
       options: {
         headerShown: false,
         tabBarIcon: ({ focused }) => {
@@ -50,7 +44,7 @@ export const AppStack = createBottomTabNavigator({
       options: {
         headerShown: false,
         tabBarIcon: ({ focused }) => {
-          return <Ionicons name='basket' color={focused ? colors.primary[600] : colors.neutral[600]} size={20} />;
+          return <Ionicons name='restaurant' color={focused ? colors.primary[600] : colors.neutral[600]} size={20} />;
         }
       },
       linking: {

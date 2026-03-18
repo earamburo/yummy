@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ActivityIndicator, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { AppStack } from "./navigation/AppStack";
+import { ScanStack } from "./screens";
 
 /*
  * 
@@ -20,7 +21,16 @@ const RootStack = createNativeStackNavigator({
             linking: {
                 path: ''
             },
-
+        },
+        Scan: {
+            screen: ScanStack,
+            options: {
+                headerShown: false,
+                presentation: 'modal'
+            },
+            linking: {
+                path: 'scan-tab'
+            },
         }
     }
 });
