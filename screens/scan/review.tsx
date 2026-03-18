@@ -19,7 +19,7 @@ import {
   IngredientRow,
 } from '@/components';
 import { colors, spacing, typography } from '@/constants/theme';
-import { useAppStore } from '@/stores/appStore';
+// import { useAppStore } from '@/stores/appStore';
 import { IngredientCategory, ParsedIngredient } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -43,10 +43,10 @@ const CATEGORY_LABELS: Record<IngredientCategory, string> = {
   other: 'Other',
 };
 
-export default function ReviewScreen() {
+export const ReviewScreen = () => {
   const router = useRouter();
   const params = useLocalSearchParams<{ ingredients: string }>();
-  const addIngredients = useAppStore((s: any) => s.addIngredients);
+  // const addIngredients = useAppStore((s: any) => s.addIngredients);
 
   // Parse ingredients from route params
   const initialIngredients: ParsedIngredient[] = useMemo(() => {
@@ -87,7 +87,7 @@ export default function ReviewScreen() {
 
   // ---- Save all to pantry ----
   const handleSaveAll = () => {
-    addIngredients(ingredients);
+    // addIngredients(ingredients);
     // Navigate to pantry (replacing the scan flow stack)
     router.replace('/(tabs)/pantry');
   };

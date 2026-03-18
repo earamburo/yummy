@@ -16,13 +16,14 @@
 // For development, we simulate the processing with a timer.
 // ============================================================================
 
-import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
-import { useRouter, useLocalSearchParams } from 'expo-router';
 import { CTAButton } from '@/components';
-import { colors, typography, spacing, radii, animation } from '@/constants/theme';
+import { colors, radii, spacing, typography } from '@/constants/theme';
 import { ParsedIngredient } from '@/types';
 import { generateId } from '@/utils';
+import { useNavigation } from '@react-navigation/native';
+import { useLocalSearchParams } from 'expo-router';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
 
 // ---- Processing stage labels ----
 const STAGES = [
@@ -49,8 +50,9 @@ const MOCK_INGREDIENTS: ParsedIngredient[] = [
   { id: generateId(), rawText: 'OLIVE OIL XVR', name: 'Extra virgin olive oil', category: 'condiment', quantity: 1, unit: 'bottle', price: 8.99, isValid: true },
 ];
 
-export default function ProcessingScreen() {
-  const router = useRouter();
+export const ProcessingScreen = () => {
+  const navigation = useNavigation();
+
   const { imageUri } = useLocalSearchParams<{ imageUri: string }>();
 
   const [progress, setProgress] = useState(0);
@@ -103,10 +105,11 @@ export default function ProcessingScreen() {
   const navigateToReview = () => {
     // In production, pass the actual parsed ingredients from the OCR pipeline.
     // We use JSON.stringify because Expo Router params are strings.
-    router.replace({
-      pathname: '/scan/review',
-      params: { ingredients: JSON.stringify(MOCK_INGREDIENTS) },
-    });
+    // router.replace({
+    //   pathname: '/scan/review',
+    //   params: { ingredients: JSON.stringify(MOCK_INGREDIENTS) },
+    // });
+    navigation.navigate('Scan', { screen: 'Review' })
   };
 
   return (

@@ -18,19 +18,18 @@
 //   Camera → (capture photo) → Processing → Review → Pantry
 // ============================================================================
 
-import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, Pressable, Alert } from 'react-native';
-import { useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
+import { colors, layout, radii, typography } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, spacing, radii, layout, typography } from '@/constants/theme';
+import { useNavigation } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
+import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 
-// NOTE: In production, uncomment and install these:
-// import { CameraView, useCameraPermissions } from 'expo-camera';
-// import * as ImagePicker from 'expo-image-picker';
+// // NOTE: In production, uncomment and install these:
 
-export default function CameraScreen() {
-  const router = useRouter();
+export const CameraScreen = () => {
+
+  const navigation = useNavigation();
   const [flashEnabled, setFlashEnabled] = useState(false);
 
   // ---- Permission Handling ----
@@ -50,10 +49,11 @@ export default function CameraScreen() {
     // router.push({ pathname: '/scan/processing', params: { imageUri: photo.uri } });
 
     // For development: simulate capture and navigate
-    router.push({
-      pathname: '/scan/processing',
-      params: { imageUri: 'simulated-capture-uri' },
-    });
+    // router.push({
+    //   pathname: '/scan/processing',
+    //   params: { imageUri: 'simulated-capture-uri' },
+    // });
+    navigation.navigate('Scan', { screen: 'Processing'} )
   };
 
   // ---- Pick from Gallery ----
