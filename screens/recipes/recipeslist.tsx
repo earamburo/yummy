@@ -19,9 +19,18 @@ import { useRouter } from 'expo-router';
 import React, { useCallback, useMemo } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+
+// Define the param list for RecipesStack
+type RecipesStackParamList = {
+    Recipes: undefined;
+    Recipe: { id: string };
+    Cooked: { recipeId: string };
+};
 
 export const RecipesListScreen = () => {
     const router = useRouter();
+    const navigation = useNavigation<NavigationProp<RecipesStackParamList>>();
     //   const recipes = useAppStore((s) => s.recipes);
     const recipes = mockRecipes;
     //   const pantry = useAppStore((s) => s.pantry);
@@ -53,10 +62,11 @@ export const RecipesListScreen = () => {
         ({ item }: { item: Recipe }) => (
             <RecipeCard
                 recipe={item}
-                onPress={() => router.push(`/recipe/${item.id}`)}
+                onPress={() => navigation.navigate('Recipe', { id: item.id })}
+                // onPress={() => console.log('Recipe card clicked')}
             />
         ),
-        [router]
+        [navigation]
     );
 
     const keyExtractor = useCallback((item: Recipe) => item.id, []);
@@ -73,7 +83,7 @@ export const RecipesListScreen = () => {
                     title="No ingredients yet"
                     subtitle="Scan a receipt first, then we'll suggest recipes based on what you bought."
                     actionTitle="Scan a receipt"
-                    onAction={() => router.push('/scan/camera')}
+                    // onAction={() => router.push('/scan/camera')}
                 />
             </SafeAreaView>
         );
@@ -94,7 +104,7 @@ export const RecipesListScreen = () => {
                     title="No recipes found"
                     subtitle="We couldn't find recipes matching your current ingredients. Try scanning more items."
                     actionTitle="Scan more items"
-                    onAction={() => router.push('/scan/camera')}
+                    // onAction={() => router.push('/scan/camera')}
                 />
             </SafeAreaView>
         );

@@ -53,7 +53,7 @@ export const CameraScreen = () => {
     //   pathname: '/scan/processing',
     //   params: { imageUri: 'simulated-capture-uri' },
     // });
-    navigation.navigate('Scan', { screen: 'Processing'} )
+    navigation.navigate('Scan', { screen: 'Processing'} );
   };
 
   // ---- Pick from Gallery ----
@@ -70,15 +70,15 @@ export const CameraScreen = () => {
     // }
 
     // For development: simulate and navigate
-    router.push({
-      pathname: '/scan/processing',
-      params: { imageUri: 'simulated-gallery-uri' },
-    });
+    // router.push({
+    //   pathname: '/scan/processing',
+    //   params: { imageUri: 'simulated-gallery-uri' },
+    // });
   };
 
   // ---- Close Camera ----
   const handleClose = () => {
-    router.back();
+    // router.back();
   };
 
   return (

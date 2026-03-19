@@ -12,26 +12,32 @@
 // ============================================================================
 
 import { CTAButton } from '@/components';
-import { colors, radii, spacing, typography } from '@/constants/theme';
-import { useAppStore } from '@/stores/appStore';
+import { colors, radii, spacing, typography, layout } from '@/constants/theme';
+import { mockCookingLogs, mockRecipes } from '@/stores/mockData';
+// import { useAppStore } from '@/stores/appStore';
 import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useMemo } from 'react';
 import {
+  ImageBackground,
   Pressable,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 
 export const RecipeDetailScreen = () => {
-  const router = useRouter();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const router = useRoute();
+  const { id } = router.params as { id: string };
 
-  const recipes = useAppStore((s) => s.recipes);
-  const markAsCooked = useAppStore((s) => s.markAsCooked);
+  console.log('Testing', id);
+  // const recipes = useAppStore((s) => s.recipes);
+  // const markAsCooked = useAppStore((s) => s.markAsCooked);
+
+  const recipes = mockRecipes;
+  const markAsCooked = mockCookingLogs
 
   const recipe = useMemo(
     () => recipes.find((r) => r.id === id),
@@ -39,23 +45,23 @@ export const RecipeDetailScreen = () => {
   );
 
   // ---- Handle "I cooked this" ----
-  const handleCooked = () => {
-    if (!recipe) return;
-    const deductions = markAsCooked(recipe.id, recipe.servings);
-    router.push({
-      pathname: '/recipe/cooked',
-      params: {
-        recipeId: recipe.id,
-        deductions: JSON.stringify(deductions),
-      },
-    });
-  };
+  // const handleCooked = () => {
+  //   if (!recipe) return;
+  //   const deductions = markAsCooked(recipe.id, recipe.servings);
+  //   router.push({
+  //     pathname: '/recipe/cooked',
+  //     params: {
+  //       recipeId: recipe.id,
+  //       deductions: JSON.stringify(deductions),
+  //     },
+  //   });
+  // };
 
   if (!recipe) {
     return (
       <View style={styles.notFound}>
         <Text style={styles.notFoundText}>Recipe not found</Text>
-        <CTAButton title="Go back" onPress={() => router.back()} />
+        {/* <CTAButton title="Go back" onPress={() => router.back()} /> */}
       </View>
     );
   }
@@ -73,7 +79,7 @@ export const RecipeDetailScreen = () => {
           {/* Back button */}
           <Pressable
             style={styles.backButton}
-            onPress={() => router.back()}
+            // onPress={() => router.back()}
             hitSlop={12}
           >
             <Ionicons name="arrow-back" size={18} color="#FFFFFF" />
@@ -82,7 +88,7 @@ export const RecipeDetailScreen = () => {
           {/* Favorite button */}
           <Pressable
             style={styles.favoriteButton}
-            onPress={() => useAppStore.getState().toggleFavorite(recipe.id)}
+            // onPress={() => useAppStore.getState().toggleFavorite(recipe.id)}
             hitSlop={12}
           >
             <Ionicons
@@ -94,6 +100,31 @@ export const RecipeDetailScreen = () => {
 
           {/* Title and info pills on hero */}
           <View style={styles.heroContent}>
+            {/* Image area — gradient placeholder until we have real images */}
+            <View style={styles.imageArea}>
+              {recipe.imageUrl ? (
+                <ImageBackground
+                  source={{ uri: recipe.imageUrl }}
+                  style={styles.image}
+                  imageStyle={styles.imageInner}
+                >
+                  <PantryBadge count={recipe.pantryMatchCount} />
+                </ImageBackground>
+              ) : (
+                // Gradient placeholder — different hue per recipe for variety
+                <View
+                  style={[
+                    styles.image,
+                    styles.placeholderImage,
+                    {
+                      backgroundColor: getPlaceholderColor(recipe.id),
+                    },
+                  ]}
+                >
+                  <PantryBadge count={recipe.pantryMatchCount} />
+                </View>
+              )}
+            </View>
             <Text style={styles.heroTitle}>{recipe.title}</Text>
             <View style={styles.pillRow}>
               <View style={styles.infoPill}>
@@ -171,11 +202,35 @@ export const RecipeDetailScreen = () => {
 
         {/* ---- Cook Button ---- */}
         <View style={styles.cookButtonContainer}>
-          <CTAButton title="I cooked this" onPress={handleCooked} />
+          {/* <CTAButton title="I cooked this" onPress={handleCooked} /> */}
         </View>
       </ScrollView>
     </View>
   );
+}
+
+
+function PantryBadge({ count }: { count: number }) {
+  return (
+    <View style={styles.badge}>
+      <Text style={styles.badgeText}>
+        Uses {count} of your items
+      </Text>
+    </View>
+  );
+}
+
+function getPlaceholderColor(id: string): string {
+  const placeholderColors = [
+    '#C1946A', '#A67C52', '#D4A574', '#8B6544',
+    '#B08D6E', '#967254', '#C4A882', '#7A5C3E',
+  ];
+  // Simple hash from the ID to pick a color
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) {
+    hash = id.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return placeholderColors[Math.abs(hash) % placeholderColors.length];
 }
 
 const styles = StyleSheet.create({
@@ -252,6 +307,72 @@ const styles = StyleSheet.create({
     fontSize: typography.scale.micro.fontSize,
     color: colors.text.inverse,
     fontWeight: typography.weight.medium,
+  },
+  card: {
+    marginHorizontal: spacing.screenHorizontal,
+    marginBottom: spacing.lg,
+    borderRadius: layout.recipeCard.borderRadius,
+    overflow: 'hidden',
+    borderWidth: 0.5,
+    borderColor: colors.border.default,
+    backgroundColor: colors.background.card,
+  },
+  cardPressed: {
+    transform: [{ scale: 0.98 }],
+    opacity: 0.95,
+  },
+  imageArea: {
+    height: layout.recipeCard.imageHeight,
+    overflow: 'hidden',
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    padding: spacing.lg,
+  },
+  imageInner: {
+    // Ensure image covers the area without distortion
+    resizeMode: 'cover',
+  },
+  placeholderImage: {
+    // Warm earthy tone placeholder for food context
+    opacity: 0.85,
+  },
+  body: {
+    padding: layout.recipeCard.bodyPadding,
+    paddingHorizontal: spacing.cardPadding,
+  },
+  title: {
+    fontSize: typography.scale.headingSm.fontSize,
+    fontWeight: typography.weight.medium,
+    color: colors.text.primary,
+    lineHeight: typography.scale.headingSm.lineHeight,
+    marginBottom: 6,
+  },
+  metaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  metaText: {
+    fontSize: typography.scale.label.fontSize,
+    color: colors.text.secondary,
+  },
+  metaDot: {
+    fontSize: typography.scale.label.fontSize,
+    color: colors.text.tertiary,
+  },
+  badge: {
+    alignSelf: 'flex-start',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: radii.md,
+  },
+  badgeText: {
+    fontSize: typography.scale.micro.fontSize,
+    fontWeight: typography.weight.medium,
+    color: colors.text.primary,
   },
 
   // ---- Ingredients ----
